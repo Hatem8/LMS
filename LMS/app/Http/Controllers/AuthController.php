@@ -25,18 +25,16 @@ class AuthController extends Controller
             return back()->withErrors(['emailOrName'=>'Invalid Username or Email']);
         }
         $check = Hash::check($data['password'],$user->password);
-        if ($check){
-            Auth::login($user);
-        //    return to_route('login_page');
-        }
-        else{
+        if (!$check){
             return back()->withErrors(['password'=>'Incorrect Password']);
         }
+        Auth::login($user);
+        return to_route('after_login');
     }
 
     public function logout (Request $request){
         $user = $request->user();
         Auth::logout();
-      //  return to_route('login_page');
+      return to_route('login_page');
     }
 }
