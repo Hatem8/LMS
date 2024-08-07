@@ -31,7 +31,23 @@ class AuthController extends Controller
         Auth::login($user);
         return to_route('after_login');
     }
+    public function registerPage(){
+        return view('register');
+    }
+    public function register (Request $request){
 
+        $request ->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email',
+            'password' => 'required|min:8|same:confirmPassword'
+        ]);
+        $request['password'] = Hash::make($request['password']);
+
+        $user = User::create($request->except('_token'));
+        Auth::login($user);
+
+        return to_route('after_login');
+    }
     public function logout (Request $request){
         $user = $request->user();
         Auth::logout();
