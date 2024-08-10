@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text('content');
             $table->unsignedInteger('rate');
             $table->foreignId('course_id')->constrained('courses')->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }

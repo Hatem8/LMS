@@ -1,7 +1,16 @@
 <?php
 
+use App\Http\Controllers\API\BlogCommentController;
+use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\CourseController;
+use App\Http\Controllers\API\FaqController;
+use App\Http\Controllers\API\LessonController;
+use App\Http\Controllers\API\QuizController;
+use App\Http\Controllers\API\ReviewController;
+use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +23,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::apiResource('blogs',BlogController::class);
+Route::apiResource('blogcomments',BlogCommentController::class);
+Route::apiResource('categories',CategoryController::class);
+Route::apiResource('courses',CourseController::class);
+Route::apiResource('faqs',FaqController::class);
+Route::apiResource('lessons',LessonController::class);
+Route::apiResource('quizzes',QuizController::class);
+Route::apiResource('reviews',ReviewController::class);
+Route::apiResource('users',UserController::class);
+
+
