@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BlogRequest;
 use App\Models\Blog;
+use App\Models\BlogComment;
 use App\Traits\ApiResponseTrait;
 
 class BlogController extends Controller
@@ -34,6 +35,8 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
+        $blogComments = BlogComment::where('blog_id',$blog->id)->get();
+        $blog['comments'] = $blogComments;
         return $this->sendResponse('Retrieved Successfully',$blog);
     }
 
