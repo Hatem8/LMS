@@ -23,11 +23,12 @@ class CourseRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:20|min:3',
+            'title'=> 'required|string|min:3|max:20',
             'duration' => 'required',
             'overview' => 'required|string|min:10',
             'price' => 'required|numeric',
             'discount' => 'nullable|numeric',
-            'image' => 'required|string',
+            'image' => 'required|file|mimes:png,jpg,jpeg|max:10000',
             'category_id' => 'required|exists:categories,id'
         ];
     }

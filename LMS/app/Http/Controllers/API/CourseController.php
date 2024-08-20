@@ -30,7 +30,9 @@ class CourseController extends Controller
      */
     public function store(CourseRequest $request)
     {
-        $course = Course::create($request->validated());
+        $course =$request->validated();
+        $course['image']= url('/Storage'.'/'.$request->image->store('courses'));
+        Course::create($course);
         return $this->sendResponse('Created Successfully',$course);
     }
 

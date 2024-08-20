@@ -8,6 +8,7 @@ use App\Models\Blog;
 use App\Models\BlogComment;
 use App\Models\User;
 use App\Traits\ApiResponseTrait;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -26,9 +27,10 @@ class BlogController extends Controller
      */
     public function store(BlogRequest $request)
     {
-        $blog = Blog::create($request->validated());
+        $blog= $request->validated();
+        $blog['image'] = url('/Storage'.'/'.$request->image->store('blogs'));
+        Blog::create($blog);
         return $this->sendResponse('Created Successfully',$blog);
-
     }
 
     /**
