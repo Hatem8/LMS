@@ -8,7 +8,6 @@ use App\Http\Controllers\API\LessonController;
 use App\Http\Controllers\API\QuizController;
 use App\Http\Controllers\API\ReviewController;
 use App\Http\Controllers\API\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\BlogController;
 use App\Http\Controllers\API\AuthController;
@@ -29,7 +28,9 @@ use App\Http\Controllers\API\AuthController;
 // });
 
 Route::apiResource('blogs',BlogController::class);
-Route::apiResource('blogcomments',BlogCommentController::class);
+Route::apiResource('blogcomments',BlogCommentController::class)->except(['store','update']);
+Route::post('blogcomments',[BlogCommentController::class,'store'])->middleware('auth:api');
+Route::post('blogcomments',[BlogCommentController::class,'update'])->middleware('auth:api');
 Route::apiResource('categories',CategoryController::class);
 Route::apiResource('courses',CourseController::class);
 Route::apiResource('faqs',FaqController::class);
