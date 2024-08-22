@@ -38,11 +38,14 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        $blogComments = BlogComment::where('blog_id',$blog->id)->get();
-        for ($i = 0; $i < $blogComments->count(); $i++) {
-            $blogComments[$i]['user'] = User::where('id',$blogComments[$i]->user_id)->get();
+
+        $comments = $blog->blog_comments;
+        foreach($comments as $comment){
+            $comment['user'] = $comment->user;
         }
-        $blog['comments'] = $blogComments;
+        $blog['blog_comments'] = $comments;
+
+
         return $this->sendResponse('Retrieved Successfully',$blog);
     }
 

@@ -32,7 +32,15 @@ class CourseController extends Controller
     {
         $course =$request->validated();
         $course['image']= url('/Storage'.'/'.$request->image->store('courses'));
-        Course::create($course);
+        $course=Course::create($course);
+
+        /**
+         * de hna static 3lshan lsa m3ndnash 7aga esmha enroll in course
+         */
+        $user = User::find(1);
+        $user->courses()->attach($course->id);
+
+
         return $this->sendResponse('Created Successfully',$course);
     }
 
@@ -41,17 +49,16 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        $course['category'] = Category::where('id',$course->category_id)->get();
-        $course['faq'] = Faq::where('course_id',$course->id)->get();
-        $course['lessons'] = Lesson::where('course_id',$course->id)->get();
-        $course['quizzes']= Quiz::where('course_id',$course->id)->get();
-        $reviews = Review::where('course_id',$course->id)->get();
-        for( $i=0; $i < $reviews->count() ; $i++){
-            $reviews[$i]['user']= User::where('id',$reviews[$i]->user_id)->get();
+        $course['category'] = $course->category->name;
+        $course['faqs'] = $course->faqs;
+        $course['lessons'] = $course->lessons;
+        $course['quizzes'] = $course->quizzes;
+        $reviews = $course->reviews;
+        foreach($reviews as $review){
+           $review['user']= $review->user;
         }
         $course['reviews']=$reviews;
-
-
+        $course['usersNumber']=$course->users->count();
         return $this->sendResponse('Retrieved Successfully',$course);
     }
 

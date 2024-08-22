@@ -20,6 +20,7 @@ return new class extends Migration
             $table->decimal('price');
             $table->float('discount')->nullable();
             $table->string('image');
+            $table->string('instructor');
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->timestamps();
         });

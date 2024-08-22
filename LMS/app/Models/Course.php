@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Course extends Model
 {
@@ -31,9 +32,8 @@ class Course extends Model
         return $this->hasMany(Review::class);
     }
 
-    public function users()
-    {
-        return $this->hasMany(User::class);
+    public function users(): BelongsToMany {
+        return $this->belongsToMany(User::class);
     }
 
 }

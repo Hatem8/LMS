@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -53,9 +54,8 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(BlogComment::class);
     }
 
-    public function courses()
-    {
-        return $this->hasMany(Course::class);
+    public function courses(): BelongsToMany {
+        return $this->belongsToMany(Course::class);
     }
     public function getJWTIdentifier()
     {

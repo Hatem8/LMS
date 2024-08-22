@@ -28,16 +28,19 @@ use App\Http\Controllers\API\AuthController;
 // });
 
 Route::apiResource('blogs',BlogController::class);
-Route::apiResource('blogcomments',BlogCommentController::class)->except(['store','update']);
+Route::apiResource('blogcomments',BlogCommentController::class)->except(['update','store']);
 Route::post('blogcomments',[BlogCommentController::class,'store'])->middleware('auth:api');
-Route::post('blogcomments',[BlogCommentController::class,'update'])->middleware('auth:api');
+Route::put('blogcomments/{id}',[BlogCommentController::class,'update'])->middleware('auth:api');
 Route::apiResource('categories',CategoryController::class);
 Route::apiResource('courses',CourseController::class);
 Route::apiResource('faqs',FaqController::class);
 Route::apiResource('lessons',LessonController::class);
 Route::apiResource('quizzes',QuizController::class);
-Route::apiResource('reviews',ReviewController::class);
+Route::apiResource('reviews',ReviewController::class)->except(['update','store']);
+Route::post('reviews',[ReviewController::class,'store'])->middleware('auth:api');
+Route::put('reviews/{id}',[ReviewController::class,'update'])->middleware('auth:api');
 Route::apiResource('users',UserController::class);
+
 
 Route::post('register',[AuthController::class,'register']);
 Route::post('login', [AuthController::class,'login']);
