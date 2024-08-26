@@ -16,9 +16,16 @@ class BlogFactory extends Factory
      */
     public function definition(): array
     {
+        $imageName = $this->faker->image(storage_path('app/blogs'),
+        640,
+        480,
+        null,
+        false
+    );
         return [
             'title' => fake()->name(),
             'description'=>fake()->realText(),
+            'image'=> url('/Storage/blogs/').$imageName,
         ];
     }
 }

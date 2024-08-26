@@ -25,7 +25,9 @@ class QuizController extends Controller
      */
     public function store(QuizRequest $request)
     {
-        $quiz = Quiz::create($request->validated());
+        $quiz = $request->validated();
+        $quiz['image']= url('/Storage'.'/'.$request->image->store('quizzes'));
+        $quiz=Quiz::create($quiz);
         return $this->sendResponse('Created Successfully',$quiz);
     }
 

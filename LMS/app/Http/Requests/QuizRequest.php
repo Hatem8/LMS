@@ -22,7 +22,7 @@ class QuizRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image'=> 'required|string',
+            'image' => 'required|file|mimes:png,jpg,jpeg|max:10000',
             'course_id'=> 'required|exists:courses,id'
         ];
     }
