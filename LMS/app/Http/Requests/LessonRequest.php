@@ -23,7 +23,7 @@ class LessonRequest extends FormRequest
     {
 
         return [
-            'title' => 'required|min:3|max:10',
+            'title' => 'required|min:3|max:30',
             'description' => 'required|string|min:10',
             'url'=> 'required|string',
             'course_id'=> 'required|exists:courses,id'

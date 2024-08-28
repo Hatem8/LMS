@@ -5,13 +5,10 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseRequest;
 use App\Models\Course;
-use App\Models\Category;
-use App\Models\Faq;
-use App\Models\Lesson;
-use App\Models\Quiz;
-use App\Models\Review;
 use App\Models\User;
 use App\Traits\ApiResponseTrait;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class CourseController extends Controller
 {
@@ -76,6 +73,8 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
+        $imagePath= Str::after($course->image,'Storage/');
+        Storage::disk('public')->delete($imagePath);
         $course->delete();
         return $this->sendResponse('Deleted Successfully');
     }

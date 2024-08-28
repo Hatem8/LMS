@@ -5,8 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BlogRequest;
 use App\Models\Blog;
-use App\Models\BlogComment;
-use App\Models\User;
+use Illuminate\Support\Str;
 use App\Traits\ApiResponseTrait;
 use Illuminate\Support\Facades\Storage;
 
@@ -63,6 +62,8 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
+        $imagePath= Str::after($blog->image,'Storage/');
+        Storage::disk('public')->delete($imagePath);
         $blog ->delete();
         return $this->sendResponse('Deleted Successfully');
     }

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\QuizRequest;
 use App\Models\Quiz;
 use App\Traits\ApiResponseTrait;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 
 class QuizController extends Controller
@@ -53,6 +55,8 @@ class QuizController extends Controller
      */
     public function destroy(Quiz $quiz)
     {
+        $imagePath= Str::after($quiz->image,'Storage/');
+        Storage::disk('public')->delete($imagePath);
         $quiz->delete();
         return $this->sendResponse('Deleted Successfully');
     }
