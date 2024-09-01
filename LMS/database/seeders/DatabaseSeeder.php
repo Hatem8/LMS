@@ -17,14 +17,15 @@ class DatabaseSeeder extends Seeder
 
 
         //et3mlo
-      //  \App\Models\Blog::factory(1)->create();
-      //  \App\Models\Course::factory(1)->create();
-     // \App\Models\Quiz::factory(1)->create();
-      //  \App\Models\User::factory(10)->create();
-       //\App\Models\Category::factory(10)->create();
-    //   \App\Models\BlogComment::factory(10)->create();
-    //   \App\Models\Faq::factory(10)->create();
-      // \App\Models\Review::factory(10)->create();
+    //  \App\Models\User::factory(10)->create();
+    //  \App\Models\Category::factory(10)->create();
+    //  \App\Models\Blog::factory(10)->create();
+    //  \App\Models\Course::factory(10)->create();
+    //  \App\Models\Quiz::factory(10)->create();
+    //  \App\Models\BlogComment::factory(10)->create();
+    //  \App\Models\Faq::factory(10)->create();
+    //  \App\Models\Review::factory(10)->create();
+    // \App\Models\Instructor::factory(10)->create();
     }
 }
 

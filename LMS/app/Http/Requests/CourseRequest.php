@@ -29,7 +29,6 @@ class CourseRequest extends FormRequest
             'price' => 'required|numeric',
             'discount' => 'nullable|numeric',
             'image' => 'required|file|mimes:png,jpg,jpeg|max:10000',
-            'instructor'=>'required|string',
             'category_id' => 'required|exists:categories,id'
         ];
     }

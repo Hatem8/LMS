@@ -31,6 +31,10 @@ class Course extends Model
     {
         return $this->hasMany(Review::class);
     }
+    public function instructor()
+    {
+        return $this->hasOne(Instructor::class);
+    }
 
     public function users(): BelongsToMany {
         return $this->belongsToMany(User::class);

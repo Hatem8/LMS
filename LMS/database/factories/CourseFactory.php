@@ -30,7 +30,6 @@ class CourseFactory extends Factory
             'price' => fake()->numberBetween(50,100),
             'discount' =>fake()->numberBetween(1,8)*10,
             'image'=> url('/Storage/courses'.'/'.$imageName),
-            'instructor' =>fake()->name(),
             'category_id'=>Category::inRandomOrder()->first()->id,
         ];
     }

@@ -56,6 +56,7 @@ class CourseController extends Controller
         }
         $course['reviews']=$reviews;
         $course['usersNumber']=$course->users->count();
+        $course['lessonsNumber']=$course->lessons->count();
         return $this->sendResponse('Retrieved Successfully',$course);
     }
 

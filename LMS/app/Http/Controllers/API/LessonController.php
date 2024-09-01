@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LessonRequest;
 use App\Traits\ApiResponseTrait;
 use App\Models\Lesson;
-
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class LessonController extends Controller
 {
@@ -25,7 +26,9 @@ class LessonController extends Controller
      */
     public function store(LessonRequest $request)
     {
-        $lesson = Lesson::create($request->validated());
+        $lesson=$request->validated();
+        $lesson['url']= url('/Storage'.'/'.$request->url->store('lessons'));
+        $lesson = Lesson::create($lesson);
         return $this->sendResponse('Created Successfully',$lesson);
     }
 
@@ -51,6 +54,8 @@ class LessonController extends Controller
      */
     public function destroy(Lesson $lesson)
     {
+        $lessonPath=Str::after($lesson->url, 'Storage/');
+        Storage::disk('public')->delete($lessonPath);
         $lesson->delete();
         return $this->sendResponse('Deleted Successfully');
     }
